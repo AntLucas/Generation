@@ -96,7 +96,7 @@ WHERE nome_personagem
 LIKE "%c%"; -- buscando os personagens com a letra C
 
 SELECT * FROM tb_personagem
-INNER JOIN tb_classe where tb_personagem.id_classe = tb_classe.id_classe; -- select com Inner join entre tabela classe e personagem
+INNER JOIN tb_classe on tb_personagem.id_classe = tb_classe.id_classe; -- select com Inner join entre tabela classe e personagem
 
 SELECT * FROM tb_personagem 
 INNER JOIN tb_classe
