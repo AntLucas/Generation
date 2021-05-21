@@ -37,7 +37,7 @@ coloque no seu GitHuB pessoal e compartilhe esta atividade.
 -- criação do db
 CREATE DATABASE db_generation_game_online;
 
-use db_generation_game_online;
+USE db_generation_game_online;
 
 -- criação da tb_classe
 CREATE TABLE tb_classe(
@@ -100,5 +100,5 @@ INNER JOIN tb_classe where tb_personagem.id_classe = tb_classe.id_classe; -- sel
 
 SELECT * FROM tb_personagem 
 INNER JOIN tb_classe
-WHERE tb_personagem.id_classe = tb_classe.id_classe
+on tb_personagem.id_classe = tb_classe.id_classe
 AND tb_classe.nome_classe = "Caçador"; -- Faça um select onde traga todos os personagem de uma classe específica (classe caçador)
