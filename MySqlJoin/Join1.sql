@@ -88,8 +88,7 @@ SELECT * FROM tb_personagem
 WHERE ataque > 2000; -- selecionando todos os personagens com poder de ataque maior que 2000
 
 SELECT * FROM tb_personagem 
-WHERE defesa > 1000
-AND defesa < 2000; -- selecionando todos os personagens com defesa entre 1000 e 2000
+WHERE defesa BETWEEN 1000 AND 2000; -- selecionando todos os personagens com defesa entre 1000 e 2000
 
 SELECT * FROM tb_personagem 
 WHERE nome_personagem
@@ -100,5 +99,5 @@ INNER JOIN tb_classe on tb_personagem.id_classe = tb_classe.id_classe; -- select
 
 SELECT * FROM tb_personagem 
 INNER JOIN tb_classe
-on tb_personagem.id_classe = tb_classe.id_classe
-AND tb_classe.nome_classe = "Caçador"; -- Faça um select onde traga todos os personagem de uma classe específica (classe caçador)
+ON tb_personagem.id_classe = tb_classe.id_classe
+WHERE tb_classe.nome_classe = "Caçador"; -- Faça um select onde traga todos os personagem de uma classe específica (classe caçador)

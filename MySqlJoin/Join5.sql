@@ -34,3 +34,50 @@ os produtos que são da categoria hidráulica).
 Salve as querys para cada uma dos requisitos do exercício em um arquivo .SQL ou texto e
 coloque no seu GitHuB pessoal e compartilhe esta atividade.
 */
+
+-- criação do db
+CREATE DATABASE db_construindo_a_nossa_vida;
+
+USE db_construindo_a_nossa_vida;
+
+-- criação da tb_categoria
+CREATE TABLE tb_categoria(
+id_categoria BIGINT AUTO_INCREMENT,
+nome_categoria VARCHAR (255) NOT NULL,
+estoque BIGINT,
+PRIMARY KEY (id_categoria)
+);
+
+-- criação da tb_produto
+CREATE TABLE tb_produto(
+id_produto BIGINT AUTO_INCREMENT,
+nome_produto VARCHAR (255) NOT NULL,
+preco decimal(5,2),
+id_categoria BIGINT,
+
+FOREIGN KEY (id_categoria) REFERENCES tb_categoria (id_categoria),
+PRIMARY KEY (id_produto)
+);
+
+
+-- inserindo 5 valores na tb_categoria
+
+-- inserindo 8 valores na tb_produto
+
+SELECT nome_produto, preco FROM tb_produto
+WHERE preco > 50; -- select que retorna os Produtos com o valor com o valor maior do que 50 reais
+
+SELECT nome_produto, preco FROM tb_produto
+WHERE preco BETWEEN 3 AND 60;-- select que retorna os Produtos com valor entre 3 e 60 reais
+
+SELECT nome_produto, preco FROM tb_produto
+WHERE nome_produto LIKE "%C%";-- buscando os Produtos com a letra C
+
+SELECT * FROM tb_produto
+INNER JOIN tb_categoria
+ON tb_produto.id_categoria = tb_categoria.id_categoria; -- select com Inner join entre tabela categoria e produto
+
+SELECT * FROM tb_produto
+INNER JOIN tb_categoria
+ON tb_produto.id_categoria = tb_categoria.id_categoria
+WHERE tb_categoria.nome_categoria = "hidráulica"; -- select que retorna todos os Produtos de uma categoria específica (hidráulica)

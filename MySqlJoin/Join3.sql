@@ -43,6 +43,7 @@ USE db_farmacia_do_bem;
 CREATE TABLE tb_categoria(
 id_categoria BIGINT AUTO_INCREMENT,
 nome_categoria VARCHAR (255) NOT NULL,
+estoque BIGINT,
 
 PRIMARY KEY (id_categoria)
 );
@@ -52,23 +53,48 @@ CREATE TABLE tb_produto(
 id_produto BIGINT AUTO_INCREMENT,
 nome_produto VARCHAR (255) NOT NULL,
 preco decimal(5,2),
+estado VARCHAR (255),
 id_categoria BIGINT,
 
 FOREIGN KEY (id_categoria) REFERENCES tb_categoria (id_categoria),
 PRIMARY KEY (id_produto)
 );
 
-
 -- inserindo 5 valores na tb_categoria
+INSERT INTO tb_categoria(nome_categoria, estoque)
+VALUES 
+("Analgésico",300),
+("Cosmético",150),
+("Utensílio",100),
+("Antibiótico",200),
+("Curativo",70);
 
 -- inserindo 8 valores na tb_produto
+INSERT INTO tb_produto (nome_produto, preco, estado, id_categoria)
+VALUES
+("Produto A", 20.50, "Líquido",1),
+("Produto B", 99.90, "Líquido",1),
+("Produto C", 30.50, "Sólido",2),
+("Produto D", 80.75, "Sólido",2),
+("Produto E", 20.50, "Sólido",2),
+("Produto F", 150.20, "Sólido",3),
+("Produto G", 50.50, "Líquido",4),
+("Produto H", 10, "Sólido",5);
 
--- select que retorna os Produtos com o valor com o valor maior do que 50 reais
+SELECT * FROM tb_produto
+WHERE preco > 50; -- select que retorna os Produtos com o valor com o valor maior do que 50 reais
 
--- select que retorna os Produtos com valor entre 3 e 60 reais
+SELECT * FROM tb_produto
+WHERE preco BETWEEN 3 AND 60; -- select que retorna os Produtos com valor entre 3 e 60 reais
 
--- buscando os Produtos com a letra B
+SELECT * FROM tb_produto
+WHERE nome_produto LIKE "%B"; -- buscando os Produtos com a letra B
 
--- select com Inner join entre tabela categoria e produto
+SELECT * FROM tb_produto
+INNER JOIN tb_categoria
+ON tb_produto.id_categoria = tb_categoria.id_categoria; -- select com Inner join entre tabela categoria e produto
 
--- select que retorna todos os Produtos de uma categoria específica (cosmético)
+SELECT * FROM tb_produto
+INNER JOIN tb_categoria
+ON tb_produto.id_categoria = tb_categoria.id_categoria
+WHERE tb_categoria.nome_categoria = "cosmético"; -- select que retorna todos os Produtos de uma categoria específica (cosmético)

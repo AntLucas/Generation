@@ -43,6 +43,7 @@ USE db_pizzaria_legal;
 CREATE TABLE tb_categoria(
 id_categoria BIGINT AUTO_INCREMENT,
 nome_categoria VARCHAR (255) NOT NULL,
+tipo VARCHAR(255),
 
 PRIMARY KEY (id_categoria)
 );
@@ -53,6 +54,7 @@ id_pizza BIGINT AUTO_INCREMENT,
 nome_pizza VARCHAR (255) NOT NULL,
 preco decimal(5,2),
 tamanho VARCHAR(255) NOT NULL,
+borda VARCHAR(255),
 id_categoria BIGINT,
 
 FOREIGN KEY (id_categoria) REFERENCES tb_categoria (id_categoria),
@@ -60,15 +62,40 @@ PRIMARY KEY (id_pizza)
 );
 
 -- inserindo 5 valores na tb_categoria
+INSERT INTO tb_categoria (nome_categoria, tipo)
+VALUES 
+("Doce", "Vegana"),
+("Doce", "Não vegana"),
+("Salgada", "Vegana"),
+("Salgada", "Não vegana"),
+("Esfirra", "Não vegana");
 
 -- inserindo 8 valores na tb_pizza
+INSERT INTO tb_pizza (nome_pizza, preco, tamanho, borda, id_categoria)
+VALUES
+("Pizza doce vegana 1", 49.90, "Grande", "Recheada", 1),
+("Pizza doce vegana 2", 35.50, "Médio", "Recheada", 1),
+("Pizza doce", 24.99, "Pequena", "Não recheada", 2),
+("Pizza salgada vegana 1", 39.99, "Médio", "Recheada", 3),
+("Pizza salgada", 40, "Grande", "Não recheada", 4),
+("Pizza salgada 2", 29.90, "Pequena", "Recheada", 4),
+("Esfirra de carne", 1.50, "Médio", "Não recheada", 5),
+("Esfirra de frango com catupiry", 2.99, "Grande", "Não recheada", 5);
 
--- select que retorna os Produtos com o valor maior do que 45 reais
+SELECT * FROM tb_pizza
+WHERE preco > 45; -- select que retorna os Produtos com o valor maior do que 45 reais
 
--- select que retorna os Produtos com valor entre 29 e 60 reais
+SELECT * FROM tb_pizza
+WHERE preco BETWEEN 29 AND 60;-- select que retorna os Produtos com valor entre 29 e 60 reais
 
--- buscando os Produtos com a letra C
+SELECT * FROM tb_pizza
+WHERE nome_pizza LIKE "%C%"; -- buscando os Produtos com a letra C
 
--- select com Inner join entre tabela categoria e pizza
+SELECT * FROM tb_pizza
+INNER JOIN tb_categoria
+ON tb_pizza.id_categoria = tb_categoria.id_categoria;-- select com Inner join entre tabela categoria e pizza
 
--- select que retorna todos os Produtos de uma categoria específica (doce)
+SELECT * FROM tb_pizza
+INNER JOIN tb_categoria
+ON tb_pizza.id_categoria = tb_categoria.id_categoria
+WHERE tb_categoria.nome_categoria = "doce"; -- select que retorna todos os Produtos de uma categoria específica (doce)
