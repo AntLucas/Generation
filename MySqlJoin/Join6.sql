@@ -44,7 +44,7 @@ USE db_cursoDaMinhaVida;
 CREATE TABLE tb_categoria(
 id_categoria BIGINT AUTO_INCREMENT,
 nome_categoria VARCHAR (255) NOT NULL,
-
+descricao VARCHAR(255) NOT NULL,
 PRIMARY KEY (id_categoria)
 );
 
@@ -52,7 +52,8 @@ PRIMARY KEY (id_categoria)
 CREATE TABLE tb_curso(
 id_curso BIGINT AUTO_INCREMENT,
 nome_curso VARCHAR (255) NOT NULL,
-preco decimal(5,2),
+preco DECIMAL(5,2),
+duracao Decimal(5,2),
 id_categoria BIGINT,
 
 FOREIGN KEY (id_categoria) REFERENCES tb_categoria (id_categoria),
@@ -61,8 +62,25 @@ PRIMARY KEY (id_curso)
 
 
 -- inserindo 5 valores na tb_categoria
-
+INSERT INTO tb_categoria (nome_categoria, descricao)
+VALUES
+	('Java', 'Curso de java'),
+    ('Python', 'Curso de python'),
+    ('HTML', 'Curso de HTML'),
+    ('JavaScript', 'Curso de JavaScript'),
+    ('PHP', 'Curso de PHP');
+    
 -- inserindo 8 valores na tb_produto
+INSERT INTO tb_curso (nome_curso, preco, duracao, id_categoria)
+VALUES
+	('Curso Java', 80, 10 , 1),
+    ('Curso 2', 70, 20, 1),
+    ('Curso 3', 50.5, 60, 2),
+    ('Curso 4', 77.8, 45, 3),
+    ('Curso 5', 52.75, 35, 3),
+    ('Curso 6', 45.8, 120, 3),
+    ('Curso 7', 30.5, 430, 4),
+    ('Curso 8', 55.70, 450, 5);
 
 SELECT nome_curso, preco FROM tb_curso
 WHERE preco > 50; -- select que retorna os Produtos com o valor com o valor maior do que 50 reais

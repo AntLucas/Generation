@@ -53,6 +53,7 @@ CREATE TABLE tb_produto(
 id_produto BIGINT AUTO_INCREMENT,
 nome_produto VARCHAR (255) NOT NULL,
 preco decimal(5,2),
+estoque BIGINT,
 id_categoria BIGINT,
 
 FOREIGN KEY (id_categoria) REFERENCES tb_categoria (id_categoria),
@@ -61,8 +62,25 @@ PRIMARY KEY (id_produto)
 
 
 -- inserindo 5 valores na tb_categoria
+INSERT INTO tb_categoria(nome_categoria, estoque)
+VALUES
+("Blocos",80),
+("Cimento",60),
+("Telhas",10),
+("Ferramentas elétricas",5),
+("hidráulica",60);
 
 -- inserindo 8 valores na tb_produto
+INSERT INTO tb_produto(nome_produto, preco, estoque, id_categoria)
+VALUES
+("Produto 1", 120, 15, 1),
+("Produto 2", 150, 52, 2),
+("Produto 3", 160, 17.5, 2),
+("Produto 4", 80.5, 75, 3),
+("Produto 5", 75.5, 12, 3),
+("Produto 6",65.2, 48, 4),
+("Produto 7", 17.5, 55, 5),
+("Produto 8", 77.80, 28, 5);
 
 SELECT nome_produto, preco FROM tb_produto
 WHERE preco > 50; -- select que retorna os Produtos com o valor com o valor maior do que 50 reais
